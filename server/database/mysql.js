@@ -1,9 +1,6 @@
-const Sequelize = require('sequelize');
+const knex = require('knex')({
+    client: 'mysql2',
+    connection: process.env.JAWSDB_URL
+});
 
-const sequelize = new Sequelize(
-    process.env.JAWSDB_URL, {
-        logging: false
-    }
-);
-
-module.exports = sequelize;
+module.exports = knex;

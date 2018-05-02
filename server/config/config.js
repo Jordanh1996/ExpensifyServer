@@ -8,18 +8,3 @@ if (env === 'development' || env === 'test') {
         process.env[key] = envConfig[key];
     });
 }
-
-// Passport
-
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
-
-passport.use(
-    new GoogleStrategy({
-        callbackURL: "/auth/google/redirect",
-        clientID: process.env.GOOGLECLIENTID,
-        clientSecret: process.env.GOOGLECLIENTSECRET
-    }), () => {
-
-    }
-);
