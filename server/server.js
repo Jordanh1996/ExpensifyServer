@@ -4,7 +4,6 @@ require('./passport/passport');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 const authRoute = require('./routes/auth');
@@ -29,5 +28,3 @@ app.use('/currency', currencyRoute);
 app.listen(port, () => {
     console.log(`server is up on port ${port}`);
 });
-
-const knex = require('./database/mysql');
