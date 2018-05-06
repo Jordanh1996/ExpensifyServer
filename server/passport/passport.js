@@ -1,18 +1,19 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-const FacebookStrategy = require('passport-facebook');
+const GitHubStrategy = require('passport-github').Strategy;
 const knex = require('../database/mysql');
 
 passport.serializeUser((user, done) => {
-    done(null, user[0].id);
+    done(null, user);
 });
 
 passport.deserializeUser((id, done) => {
-    knex('users').where({
-        id
-    }).then((res) => {
-        done(null, res[0]);
-    });
+    done(null, id);
+    // knex('users').where({
+    //     id
+    // }).then((res) => {
+    //     done(null, res[0]);
+    // });
 });
 
 passport.use(
@@ -25,36 +26,42 @@ passport.use(
             googleId: profile.id
         }).then((res) => {
             if (res.length < 1) {
-                return knex('users').insert({
+                const user = {
+                    githubId: null,
                     googleId: profile.id,
                     username: profile.displayName
-                }).then((newUser) => {
-                    done(null, newUser);
+                };
+                return knex('users').insert(user).then((id) => {
+                    user.id = id[0]
+                    done(null, user);
                 });
             }
-            done(null, res)
+            done(null, res[0])
         });
     })
 );
 
 passport.use(
-    new FacebookStrategy({
-        callbackURL: '/auth/facebook/redirect',
-        clientID: process.env.FACEBOOKAPPID,
-        clientSecret: process.env.FACEBOOKSECRETID
+    new GitHubStrategy({
+        callbackURL: '/auth/github/redirect',
+        clientID: process.env.GITHUBCLIENTID,
+        clientSecret: process.env.GITHUBSECRETID
     }, (accessToken, refreshToken, profile, done) => {
         knex('users').where({
-            facebookId: profile.id
+            githubId: profile.id
         }).then((res) => {
             if (res.length < 1) {
-                return knex('users').insert({
-                    googleId: profile.id,
-                    username: profile.displayName
-                }).then((newUser) => {
-                    done(null, newUser);
+                const user = {
+                    googleId: null,
+                    githubId: profile.id,
+                    username: profile.username
+                };
+                return knex('users').insert(user).then((id) => {
+                    user.id = id[0];
+                    done(null, user);
                 });
             }
-            done(null, res)
+            done(null, res[0])
         });
     })
 );

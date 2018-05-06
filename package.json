@@ -15,19 +15,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
-    "cookie-session": "^2.0.0-beta.3",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.2.1",
     "knex": "^0.14.6",
     "lodash": "^4.17.5",
     "mysql2": "^1.5.3",
     "passport": "^0.4.0",
-    "passport-facebook": "^2.1.1",
+    "passport-github": "^1.1.0",
     "passport-google-oauth20": "^1.0.0",
     "redis": "^2.8.0",
-    "uuid": "^3.2.1",
-    "validator": "^9.4.0"
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "eslint-config-rallycoding": "^3.2.0",

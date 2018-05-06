@@ -11,11 +11,11 @@ router.get('/google', passport.authenticate('google', {
 
 router.get('/google/redirect', passport.authenticate('google'), controller.dashboardRedirect);
 
-router.get('/facebook', passport.authenticate('facebook', {
-    scope: ['public_profile']
+router.get('/github', passport.authenticate('github', {
+    scope: ['profile']
 }));
 
-router.get('/facebook/redirect', passport.authenticate('facebook'), controller.dashboardRedirect)
+router.get('/github/redirect', passport.authenticate('github'), controller.dashboardRedirect)
 
 router.get('/logout', authenticate, controller.logOut);
 
