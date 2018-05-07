@@ -14,7 +14,7 @@ const currencyRoute = require('./routes/currency');
 const app = express();
 const port = process.env.PORT;
 
-app.use(cors({ origin: ['http://localhost:8080', 'https://jordan-expensify.herokuapp.com'], credentials: true }));
+app.use(cors({ origin: ['http://localhost:8080', 'https://expensify-jordan.herokuapp.com'], credentials: true }));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
