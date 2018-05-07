@@ -15,7 +15,13 @@ router.get('/github', passport.authenticate('github', {
     scope: ['profile']
 }));
 
-router.get('/github/redirect', passport.authenticate('github'), controller.dashboardRedirect)
+router.get('/github/redirect', passport.authenticate('github'), controller.dashboardRedirect);
+
+router.get('/linkedin', passport.authenticate('linkedin', {
+    scope: ['r_basicprofile']
+}));
+
+router.get('/linkedin/redirect', passport.authenticate('linkedin'), controller.dashboardRedirect);
 
 router.get('/logout', authenticate, controller.logOut);
 

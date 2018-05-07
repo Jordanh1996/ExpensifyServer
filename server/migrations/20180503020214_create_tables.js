@@ -4,6 +4,7 @@ exports.up = function (knex, Promise) {
         table.increments();
         table.string('googleId');
         table.string('githubId');
+        table.string('linkedinId');
         table.string('username');
         table.string('token');
         table.timestamp('updated_at').defaultTo(knex.fn.now());
